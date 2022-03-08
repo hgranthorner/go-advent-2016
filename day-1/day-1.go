@@ -25,10 +25,10 @@ func (d Data) get_distance() int {
 
 func (d *Data) move(s string) {
 	turn := Stridx(s, 0)
-	distance, err := strconv.Atoi(Stridx(s, 1))
+	distance, err := strconv.Atoi(strings.Trim(s, "\n")[1:])
 
 	if err != nil {
-		panic(fmt.Sprintf("Invalid input! %s", s))
+		panic(fmt.Sprintf("Invalid input! %s. Length: %d", s, len(strings.Trim(s, " "))))
 	}
 
 	if turn == "R" {
@@ -70,7 +70,6 @@ func (d *Data) move(s string) {
 func PuzzleOne(input string) int {
 	d := Data{"N", 0, 0}
 	split := strings.Split(input, ", ")
-
 	for _, s := range split {
 		d.move(s)
 	}

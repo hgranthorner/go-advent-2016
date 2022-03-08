@@ -1,6 +1,9 @@
 package day_1
 
-import "testing"
+import (
+	"io/ioutil"
+	"testing"
+)
 
 func TestReturns1(t *testing.T) {
 	if 1 != 1 {
@@ -39,5 +42,17 @@ func TestPuzzleOne(t *testing.T) {
 	result = PuzzleOne(input)
 	if result != 12 {
 		t.Errorf("%s does not equal 12! Got %d instead.", input, result)
+	}
+
+	filename := "../inputs/day-1.txt"
+	content, err := ioutil.ReadFile(filename)
+	if err != nil {
+		t.Errorf("Missing input file %s!", filename)
+	}
+
+	input = string(content)
+	result = PuzzleOne(input)
+	if result != 332 {
+		t.Errorf("%d does not equal 332!", result)
 	}
 }
