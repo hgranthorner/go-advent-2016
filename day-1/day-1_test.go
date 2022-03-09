@@ -1,6 +1,7 @@
 package day_1
 
 import (
+	"fmt"
 	"io/ioutil"
 	"testing"
 )
@@ -22,6 +23,20 @@ func TestStridx(t *testing.T) {
 	result = Stridx(input, 1)
 	if result != "b" {
 		t.Errorf("%s does not equal b!", result)
+	}
+}
+
+func TestTupleSet(t *testing.T) {
+	ts := TupleSet{}
+	result := ts.get(1, 1)
+	if result {
+		t.Errorf("1, 1 should not be true!")
+	}
+
+	ts.put(1, 1)
+	result = ts.get(1, 1)
+	if !result {
+		t.Errorf("1, 1 should be true!")
 	}
 }
 
@@ -55,4 +70,38 @@ func TestPuzzleOne(t *testing.T) {
 	if result != 332 {
 		t.Errorf("%d does not equal 332!", result)
 	}
+}
+
+func TestMakeline(t *testing.T) {
+	minx := 5
+	maxx := 5
+	miny := 5
+	maxy := 10
+	result := Makeline(minx, maxx, miny, maxy)
+	if result[0][0] != 5 || result[0][1] != 6 {
+		t.Errorf("Going down doesn't work")
+	}
+	minx = 5
+	maxx = 2
+	miny = 5
+	maxy = 5
+	result = Makeline(minx, maxx, miny, maxy)
+	if result[0][0] != 4 || result[0][1] != 5 {
+		t.Errorf("Going down doesn't work")
+	}
+}
+
+func TestPuzzleTwo(t *testing.T) {
+	input := "R8, R4, R4, R8"
+	result := PuzzleTwo(input)
+	if result != 4 {
+		t.Errorf("%d does not equal 4!", result)
+	}
+
+	filename := "../inputs/day-1.txt"
+	read_input, err := ioutil.ReadFile(filename)
+	if err != nil {
+		t.Errorf("Missing input file %s!", filename)
+	}
+	fmt.Printf("%d\n", PuzzleTwo(string(read_input)))
 }
